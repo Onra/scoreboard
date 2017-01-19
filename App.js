@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform, ListView } from 'react-native';
+
+// Import data (for dev only)
+import ScoresData from './data/scores';
 
 // Import custom components
 import Header from './components/Header';
-import AddScore from './components/AddScore';
+import AddScoreRow from './components/AddScoreRow';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
 
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     this.state = {
-      scores: []
+      scores: ScoresData,
+      dataSource: ds.cloneWithRows(ScoresData)
     }
   }
 
@@ -19,7 +25,10 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <Header></Header>
-        <AddScore></AddScore>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => <AddScoreRow score={rowData} />}
+        />
       </View>
     );
   }
