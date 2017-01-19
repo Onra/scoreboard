@@ -17,7 +17,15 @@ class App extends Component {
 
     this.state = {
       scores: ScoresData,
-      dataSource: ds.cloneWithRows(ScoresData)
+      dataSource: ds.cloneWithRows(ScoresData.sort((player1, player2) => {
+        if (player1.score < player2.score) {
+          return 1;
+        }
+        if (player1.score > player2.score) {
+          return -1;
+        }
+        return 0;
+      }))
     }
   }
 
