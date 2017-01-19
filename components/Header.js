@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 
 class Header extends Component {
   render() {
@@ -19,7 +19,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#ec4642',
-    height: 80
+    height: 80,
+    ...Platform.select({
+      ios: {
+        paddingTop: 16
+      }
+    })
   },
 
   title: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-class AddScoreRow extends Component {
+class ScoreRow extends Component {
   render() {
     return(
       <View style={styles.row}>
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AddScoreRow;
+export default ScoreRow;

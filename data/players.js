@@ -1,4 +1,4 @@
-export default Scores = [
+export default Players = [
   {
     name: 'Trump',
     score: 12
