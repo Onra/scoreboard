@@ -46,6 +46,7 @@ class ScoreList extends Component {
   render() {
     return (
       <ListView
+        enableEmptySections={true}
         keyboardShouldPersistTaps='always'
         renderHeader={() => {
           return (
