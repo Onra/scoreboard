@@ -7,7 +7,7 @@ class AddScoreRow extends Component {
     super(props);
 
     this.state = {
-      isEditing: true
+      isEditing: false
     }
 
     this.handleAddPlayer = this.handleAddPlayer.bind(this);
