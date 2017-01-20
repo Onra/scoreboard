@@ -7,3 +7,9 @@ export function addPlayer(name, score) {
     }
   };
 }
+
+export function removeAllPlayers() {
+  return {
+    type: 'CLEAN_PLAYERS'
+  };
+}

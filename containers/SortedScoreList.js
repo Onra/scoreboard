@@ -6,10 +6,12 @@ import ScoreList from '../components/ScoreList';
 
 const getSortedScores = (scores) => {
   return scores.sort((player1, player2) => {
-    if (player1.score < player2.score) {
+    score1 = parseInt(player1.score, 10);
+    score2 = parseInt(player2.score, 10);
+    if (score1 < score2) {
       return 1;
     }
-    if (player1.score > player2.score) {
+    if (score1 > score2) {
       return -1;
     }
     return 0;

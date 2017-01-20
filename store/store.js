@@ -4,10 +4,10 @@ import { createStore } from 'redux';
 import PlayersReducer from '../reducers/players';
 
 // Import data (for dev only)
-import PlayersData from '../data/players';
+// import PlayersData from '../data/players';
 
 const defaultState = {
-  players: PlayersData
+  players: []
 };
 
 const store = createStore(PlayersReducer, defaultState);

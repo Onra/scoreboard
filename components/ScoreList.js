@@ -4,6 +4,7 @@ import { ListView } from 'react-native';
 // Import custom components
 import AddPlayerRow from './AddPlayerRow';
 import ScoreRow from './ScoreRow';
+import DeleteAllRow from './DeleteAllRow';
 
 class ScoreList extends Component {
 
@@ -19,6 +20,7 @@ class ScoreList extends Component {
     }
 
     this.handleAddPlayer = this.handleAddPlayer.bind(this);
+    this.handleRemoveAllPlayers = this.handleRemoveAllPlayers.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,6 +39,10 @@ class ScoreList extends Component {
     });
   }
 
+  handleRemoveAllPlayers() {
+    this.props.removeAllPlayers();
+  }
+
   render() {
     return (
       <ListView
@@ -51,6 +57,13 @@ class ScoreList extends Component {
               onScoreChange={(value) => this.setState({scoreValue: value}) }
             />
           );
+        }}
+        renderFooter={() => {
+          if (this.state.dataSource.getRowCount() > 0) {
+            return (
+              <DeleteAllRow deleteAllPlayers={this.handleRemoveAllPlayers}></DeleteAllRow>
+            );
+          }
         }}
         dataSource={this.state.dataSource}
         renderRow={(rowData) => <ScoreRow score={rowData} />}

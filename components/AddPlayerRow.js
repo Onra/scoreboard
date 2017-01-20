@@ -21,7 +21,6 @@ class AddScoreRow extends Component {
   }
 
   handleSubmitPlayer() {
-    console.log("submit !");
     this.props.submitPlayer();
     this.setState({
       isEditing: false

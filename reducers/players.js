@@ -10,7 +10,10 @@ function players(state = [], action) {
       }
       break;
     case 'CLEAN_PLAYERS':
-      return [];
+      return {
+        ...state,
+        players: []
+      };
     default:
       return state;
   }
