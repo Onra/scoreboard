@@ -10,12 +10,11 @@ class ScoreList extends Component {
   constructor(props) {
     super(props);
 
-    // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    // const dataSource = ds.cloneWithRows(this.props.players);
-
     const dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
     this.state = {
+      nameValue: '',
+      scoreValue: '',
       dataSource: dataSource.cloneWithRows(this.props.players)
     }
 
@@ -23,7 +22,6 @@ class ScoreList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps);
     if (nextProps.players !== this.props.players) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(nextProps.players)
@@ -31,16 +29,29 @@ class ScoreList extends Component {
     }
   }
 
-  handleAddPlayer(name, score) {
-    this.props.addPlayer(name, score);
-    // console.table(this.props.players);
-    // this.dataSource = this.ds.cloneWithRows(this.props.players);
+  handleAddPlayer() {
+    this.props.addPlayer(this.state.nameValue, this.state.scoreValue);
+    this.setState({
+      nameValue: '',
+      scoreValue: ''
+    });
   }
 
   render() {
     return (
       <ListView
-        renderHeader={() => <AddPlayerRow addPlayer={this.handleAddPlayer} />}
+        keyboardShouldPersistTaps='always'
+        renderHeader={() => {
+          return (
+            <AddPlayerRow
+              submitPlayer={this.handleAddPlayer}
+              nameValue={this.state.nameValue}
+              onNameChange={(value) => this.setState({nameValue: value}) }
+              scoreValue={this.state.scoreValue}
+              onScoreChange={(value) => this.setState({scoreValue: value}) }
+            />
+          );
+        }}
         dataSource={this.state.dataSource}
         renderRow={(rowData) => <ScoreRow score={rowData} />}
       />

@@ -17,7 +17,6 @@ const getSortedScores = (scores) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log('mapStateToProps', state);
   return {
     players: getSortedScores(state.players)
   }

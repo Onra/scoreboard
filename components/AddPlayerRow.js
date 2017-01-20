@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Button } from 'react-native';
 
 class AddScoreRow extends Component {
 
@@ -7,11 +7,11 @@ class AddScoreRow extends Component {
     super(props);
 
     this.state = {
-      isEditing: false
+      isEditing: true
     }
 
     this.handleAddPlayer = this.handleAddPlayer.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
+    this.handleSubmitPlayer = this.handleSubmitPlayer.bind(this);
   }
 
   handleAddPlayer() {
@@ -20,16 +20,12 @@ class AddScoreRow extends Component {
     });
   }
 
-  handleAddPlayerSubmit() {
-    this.props.addPlayer('Toto', 13);
-  }
-
-  handleBlur() {
-    if (!this.refs.nameInput.isFocused() && !this.refs.scoreInput.isFocused()) {
-      this.setState({
-        isEditing: false
-      });
-    }
+  handleSubmitPlayer() {
+    console.log("submit !");
+    this.props.submitPlayer();
+    this.setState({
+      isEditing: false
+    });
   }
 
   renderRow() {
@@ -46,7 +42,8 @@ class AddScoreRow extends Component {
             maxLength={20}
             autoFocus={true}
             style={styles.nameInput}
-            onBlur={this.handleBlur}
+            value={this.props.nameValue}
+            onChangeText={this.props.onNameChange}
             onSubmitEditing={(event) => {
               this.refs.scoreInput.focus();
             }}
@@ -60,8 +57,16 @@ class AddScoreRow extends Component {
             autoCorrect={false}
             maxLength={10}
             keyboardType='numeric'
-            onBlur={this.handleBlur}
+            value={this.props.scoreValue}
+            onChangeText={this.props.onScoreChange}
             style={styles.scoreInput}
+          />
+
+          <Button
+            onPress={this.handleSubmitPlayer}
+            title='Ok'
+            color='#ec4642'
+            style={styles.addButton}
           />
         </View>
       );
@@ -131,6 +136,11 @@ const styles = StyleSheet.create({
   scoreInput: {
     flex: 1,
     height: 50
+  },
+
+  addButton: {
+    flex: 1,
+    fontSize: 16
   }
 })
 
